@@ -3,7 +3,7 @@
  Plugin Name: Ingeni Content Blocks 
  Plugin URI: https://ingeni.net
  Description: Show the content of a custom post of the type 'content_block' in a widget or with a shortcode. This is an extended version of the Custom Post Widget v3.2 (http://www.vanderwijk.com/wordpress/wordpress-content-blocks-widget) but with support for multiple templates.
- Version: 2021.01
+ Version: 2021.02
  Author: Johan van der Wijk & Bruce McKinnon
  Author URI: https://ingeni.net
  Donate link: https://www.paypal.me/vanderwijk
@@ -27,6 +27,8 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+ v2021.02 - Added support for 'custom-fields' and 'excerpt'
 */
 
 // Launch the plugin.
@@ -59,9 +61,18 @@ function ingeni_content_blocks_widget_load_textdomain() {
 add_action( 'plugins_loaded', 'ingeni_content_blocks_widget_load_textdomain' );
 
 // Add featured image support
+/*
 if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
 }
+*/
+
+/*
+//add_action( 'init', 'ingeni_content_blocks_add_support' );
+function ingeni_content_blocks_add_support() {
+     add_post_type_support( 'thumbnail', 'excerpt', 'custom-fields', 'revisions' ); //change page with your post type slug.
+}
+*/
 
 // Admin-only functions
 if ( is_admin() ) {

@@ -28,7 +28,7 @@ function ingeni_cpw_post_type_init() {
 		'show_in_rest' => true,
 		'hierarchical' => false,
 		'menu_icon' => 'dashicons-screenoptions',
-		'supports' => array( 'title','editor','revisions','thumbnail','author' )
+		'supports' => array( 'title','editor','revisions','thumbnail','author','custom-fields','excerpt' )
 	);
 	register_post_type( 'ingeni_content_block',$options );
 }
