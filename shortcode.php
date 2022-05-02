@@ -44,6 +44,7 @@ function ingeni_content_blocks_shortcode( $atts ) {
 	}
 
 	$content = "";
+	$located = false;
 
 	// Attempt to load a template file
 	if ( $params['template'] != '' ) {
@@ -67,7 +68,7 @@ function ingeni_content_blocks_shortcode( $atts ) {
 		$content = $template_before_content;
 
 		foreach( $content_post as $post ) :
-fb_log('located: '.$located);
+//fb_log('located: '.$located);
 			if ( ( $located ) ) {
 
 				// Template-based content

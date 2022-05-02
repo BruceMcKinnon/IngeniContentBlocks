@@ -133,6 +133,8 @@ Creating and supporting this plugin takes up a lot of my free time, therefore I 
 
 == Changelog ==
 
+v2022.01 - Fixed issue with undefined located variable in shortcode.php
+
 V2021.02 - Added support for 'custom-fields' and 'excerpt'
 
 2021.01 - Split off into Ingeni Content Blocks 

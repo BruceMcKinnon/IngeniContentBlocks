@@ -3,7 +3,7 @@
  Plugin Name: Ingeni Content Blocks 
  Plugin URI: https://ingeni.net
  Description: Show the content of a custom post of the type 'content_block' in a widget or with a shortcode. This is an extended version of the Custom Post Widget v3.2 (http://www.vanderwijk.com/wordpress/wordpress-content-blocks-widget) but with support for multiple templates.
- Version: 2021.02
+ Version: 2022.01
  Author: Johan van der Wijk & Bruce McKinnon
  Author URI: https://ingeni.net
  Donate link: https://www.paypal.me/vanderwijk
@@ -29,6 +29,8 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
  v2021.02 - Added support for 'custom-fields' and 'excerpt'
+
+ v2022.01 - Fixed issue with undefined located variable in shortcode.php
 */
 
 // Launch the plugin.
