@@ -68,21 +68,17 @@ function ingeni_content_blocks_shortcode( $atts ) {
 		$content = $template_before_content;
 
 		foreach( $content_post as $post ) :
-//fb_log('located: '.$located);
+
 			if ( ( $located ) ) {
 
 				// Template-based content
 				$template_class_name = basename($located,'.php');
-fb_log('class name: '.$template_class_name);				
+			
 				if ( class_exists( $template_class_name ) ) {
-fb_log('need to make new class: '.$template_class_name);
 					$template_class = new $template_class_name;
 				}
 				if ( class_exists ( $template_class_name ) ) {
-fb_log('class exists: '.get_class($template_class));
 					$content .= $template_class->shortcode_template( $post );
-				} else {
-fb_log('does not exist: '.$template_class_name );
 				}
 
 
