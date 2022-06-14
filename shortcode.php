@@ -49,6 +49,11 @@ function ingeni_content_blocks_shortcode( $atts ) {
 	// Attempt to load a template file
 	if ( $params['template'] != '' ) {
 
+		// Make sure get_plugin_data() is loaded
+		if( ! function_exists('get_plugin_data') ){
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+
 		$plugin_data = get_plugin_data( __FILE__ );
 		$plugin_name = $plugin_data['TextDomain'];
 		
