@@ -133,6 +133,8 @@ Creating and supporting this plugin takes up a lot of my free time, therefore I 
 
 == Changelog ==
 
+v2022.04 - Fixed various problems around loading CPT meta boxes (meta-box.php) and it's supporting CSS file.
+
 v2022.03 - Make sure wp-admin/includes/plugin.php gets loaded before calling get_plugin_data().
 
 v2022.02 - Left some debug logging in shortcode.php

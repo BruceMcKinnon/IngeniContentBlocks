@@ -3,7 +3,7 @@
  Plugin Name: Ingeni Content Blocks 
  Plugin URI: https://ingeni.net
  Description: Show the content of a custom post of the type 'content_block' in a widget or with a shortcode. This is an extended version of the Custom Post Widget v3.2 (http://www.vanderwijk.com/wordpress/wordpress-content-blocks-widget) but with support for multiple templates.
- Version: 2022.03
+ Version: 2022.04
  Author: Johan van der Wijk & Bruce McKinnon
  Author URI: https://ingeni.net
  Donate link: https://www.paypal.me/vanderwijk
@@ -33,6 +33,7 @@
  v2022.01 - Fixed issue with undefined located variable in shortcode.php
  v2022.02 - Left some debug logging in shortcode.php
  v2022.03 - Make sure wp-admin/includes/plugin.php gets loaded before calling get_plugin_data().
+ v2022.04 - Fixed various problems around loading CPT meta boxes (meta-box.php) and it's supporting CSS file.
 */
 
 // Launch the plugin.
@@ -81,29 +82,15 @@ function ingeni_content_blocks_add_support() {
 // Admin-only functions
 if ( is_admin() ) {
 
-	// Add donation and review links to plugin description
-	/* if ( ! function_exists ( 'cpw_plugin_links' ) ) {
-	
-		function cpw_plugin_links( $links, $file ) {
-			$base = plugin_basename( __FILE__ );
-			if ( $file == $base ) {
-				$links[] = '<a href="https://wordpress.org/support/plugin/content-blocks-widget/reviews/" target="_blank">' . __( 'Review', 'content-blocks-widget' ) . ' <span class="dashicons dashicons-thumbs-up"></span></a> | <a href="https://paypal.me/vanderwijk">' . __( 'Donate', 'content-blocks-widget' ) . ' <span class="dashicons dashicons-money"></span></a>';
-			}
-			return $links;
-		}
-	}
-	add_filter( 'plugin_row_meta', 'cpw_plugin_links', 10, 2 );
-	*/
-
 	require_once( 'meta-box.php' );
 	require_once( 'popup.php' );
 
-	// Enqueue styles and scripts on content_block edit page
+	// Enqueue styles and scripts on ingeni_content_block edit page
 	function ingeni_cpw_enqueue() {
 		$screen = get_current_screen();
 		// Check screen base and current post type
-		if ( 'post' === $screen -> base && 'content_block' === $screen -> post_type ) {
-			wp_enqueue_style( 'cpw-style', plugins_url( '/assets/css/content-blocks-widget.css', __FILE__ ) );
+		if ( 'post' === $screen -> base && 'ingeni_content_block' === $screen -> post_type ) {
+			wp_enqueue_style( 'cpw-style', plugins_url( '/assets/css/ingeni-content-blocks.css', __FILE__ ) );
 			wp_enqueue_script( 'clipboard', plugins_url( '/assets/js/clipboard.min.js', __FILE__ ), array(), '2.0.6', true );
 			wp_enqueue_script( 'clipboard-init', plugins_url( '/assets/js/clipboard.js', __FILE__ ), array(), false, true );
 		}

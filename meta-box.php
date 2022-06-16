@@ -2,10 +2,10 @@
 
 // Meta boxes on content_block edit page
 function ingeni_cpw_add_meta_boxes() {
-	add_meta_box( 'ingeni_cpw_info', __( 'Content Block Information', 'ingeni-content-blocks-widget' ), 'cpw_info_meta_box', 'content_block', 'side' );
-	add_meta_box( 'ingeni_cpw_shortcode', __( 'Content Block Shortcodes', 'ingeni-content-blocks-widget' ), 'cpw_shortcode_meta_box', 'content_block', 'side' );
+	add_meta_box( 'ingeni_cpw_info', __( 'Content Block Information', 'ingeni-content-blocks-widget' ), 'ingeni_cpw_info_meta_box', 'ingeni_content_block', 'side' );
+	add_meta_box( 'ingeni_cpw_shortcode', __( 'Content Block Shortcodes', 'ingeni-content-blocks-widget' ), 'ingeni_cpw_shortcode_meta_box', 'ingeni_content_block', 'side' );
 }
-add_action( 'add_meta_boxes_content_block', 'ingeni_cpw_add_meta_boxes' );
+add_action( 'add_meta_boxes', 'ingeni_cpw_add_meta_boxes' );
 
 // Shortcode meta box
 function ingeni_cpw_shortcode_meta_box( $post ) { ?>
@@ -24,11 +24,11 @@ function ingeni_cpw_shortcode_meta_box( $post ) { ?>
 }
 
 // Info meta box
-function ngeni_cpw_info_meta_box( $post ) {
-	wp_nonce_field( 'ingeni_cpw_info_meta_box', 'ngeni_cpw_info_meta_box_nonce' );
-	$value = get_post_meta( $post -> ID, '_content_block_information', true );
+function ingeni_cpw_info_meta_box( $post ) {
+	wp_nonce_field( 'ingeni_cpw_info_meta_box', 'ingeni_cpw_info_meta_box_nonce' );
+	$value = get_post_meta( $post -> ID, '_ingeni_content_block_information', true );
 	echo '<p>' . __( 'You can use this field to describe this content block:','ingeni-content-blocks-widget' ) . '</p>';
-	echo '<textarea class="cpw-information" id="cpw_content_block_information" cols="40" rows="4" name="cpw_content_block_information">' . esc_attr( $value ) . '</textarea>';
+	echo '<textarea class="cpw-information" id="ingeni_cpw_content_block_information" cols="40" rows="4" name="ingeni_cpw_content_block_information">' . esc_attr( $value ) . '</textarea>';
 }
 
 function ingeni_cpw_save_postdata( $post_id ) {
@@ -43,7 +43,7 @@ function ingeni_cpw_save_postdata( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 		return $post_id;
 
-	if ( 'content_block' == $_POST['post_type'] ) {
+	if ( 'ingeni_content_block' == $_POST['post_type'] ) {
 		if ( ! current_user_can( 'edit_page', $post_id ) )
 			return $post_id;
 		} else {
@@ -51,14 +51,16 @@ function ingeni_cpw_save_postdata( $post_id ) {
 				return $post_id;
 	}
 
+	//$content_block_information = sanitize_text_field( $_POST['ingeni_cpw_content_block_information'] );
+	//update_post_meta( $post_id, '_content_block_information', $content_block_information );
 	$content_block_information = sanitize_text_field( $_POST['ingeni_cpw_content_block_information'] );
-	update_post_meta( $post_id, '_content_block_information', $content_block_information );
+	update_post_meta( $post_id, '_ingeni_content_block_information', $content_block_information );
 }
 add_action( 'save_post', 'ingeni_cpw_save_postdata' );
 
 // Add content block information column to overview
 function ingeni_cpw_modify_content_block_table( $column ) {
-	$column['content_block_information'] = __( 'Content Block Information', 'ingeni-content-blocks-widget' );
+	$column['ingeni_content_block_information'] = __( 'Content Block Information', 'ingeni-content-blocks-widget' );
 	return $column;
 }
 add_filter( 'manage_edit-content_block_columns', 'cpw_modify_content_block_table' );
@@ -66,9 +68,9 @@ add_filter( 'manage_edit-content_block_columns', 'cpw_modify_content_block_table
 function ingeni_cpw_modify_post_table_row( $column_name, $post_id ) {
 	$custom_fields = get_post_custom( $post_id );
 	switch ( $column_name ) {
-		case 'content_block_information' :
-			if ( !empty( $custom_fields['_content_block_information'][0] ) ) {
-				echo $custom_fields['_content_block_information'][0];
+		case 'ingeni_content_block_information' :
+			if ( !empty( $custom_fields['_ingeni_content_block_information'][0] ) ) {
+				echo $custom_fields['_ingeni_content_block_information'][0];
 			}
 		break;
 	}
