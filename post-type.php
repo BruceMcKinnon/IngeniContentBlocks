@@ -45,7 +45,7 @@ function ingeni_content_block_messages( $messages ) {
 		6 => current_user_can( 'edit_theme_options' ) ? sprintf( __( 'Ingeni Content Block published. <a href="%s">Manage Widgets</a>', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ) : sprintf( __( 'Content Block published.', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ),
 		7 => __( 'Block saved.', 'ingeni-content-blocks-widget' ),
 		8 => current_user_can( 'edit_theme_options' ) ? sprintf( __( 'Ingeni Content Block submitted. <a href="%s">Manage Widgets</a>', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ) : sprintf( __( 'Content Block submitted.', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ),
-		9 => sprintf( __( 'Ingeni Content Block scheduled for: <strong>%1$s</strong>.', 'ingeni-content-blocks-widget' ), date_i18n( __( 'M j, Y @ G:i' , 'ingeni-content-blocks-widget' ), strtotime(isset($post->post_date) ? $post->post_date : null) ), esc_url( 'widgets.php' ) ),
+		9 => sprintf( __( 'Ingeni Content Block scheduled for: <strong>%1$s</strong>.', 'ingeni-content-blocks-widget' ), date_i18n( __( 'M j, Y @ G:i' , 'ingeni-content-blocks-widget' ), strtotime(isset($post->post_date) ? $post->post_date : date("Y-m-d H:i:s")) ), esc_url( 'widgets.php' ) ),
 		10 => current_user_can( 'edit_theme_options' ) ? sprintf( __( 'Ingeni Content Block draft updated. <a href="%s">Manage Widgets</a>', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ) : sprintf( __( 'Content Block draft updated.', 'ingeni-content-blocks-widget' ), esc_url( 'widgets.php' ) ),
 	);
 	return $messages;

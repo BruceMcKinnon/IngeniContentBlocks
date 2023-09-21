@@ -133,6 +133,8 @@ Creating and supporting this plugin takes up a lot of my free time, therefore I 
 
 == Changelog ==
 
+v2023.01 - post-type.php - Fix for PHP 8 - strtotime() - do not pass a null to value as param #1
+
 v2022.04 - Fixed various problems around loading CPT meta boxes (meta-box.php) and it's supporting CSS file.
 
 v2022.03 - Make sure wp-admin/includes/plugin.php gets loaded before calling get_plugin_data().
