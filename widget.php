@@ -1,5 +1,5 @@
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit;
 // First create the widget for the admin panel
 class ingeni_content_blocks_widget extends WP_Widget {
 	function __construct() {
@@ -18,55 +18,55 @@ class ingeni_content_blocks_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'custom_post_id' ); ?>"> <?php echo __( 'Ingeni Content Block to Display:', 'ingeni-content-blocks-widget' ) ?>
-				<select class="widefat" id="<?php echo $this->get_field_id( 'custom_post_id' ); ?>" name="<?php echo $this->get_field_name( 'custom_post_id' ); ?>">
+			<label for="<?php echo  esc_attr ($this->get_field_id( 'custom_post_id' )); ?>"> <?php echo esc_html__( 'Ingeni Content Block to Display:', 'ingeni-content-blocks-widget' ) ?>
+				<select class="widefat" id="<?php echo esc_attr ($this->get_field_id( 'custom_post_id' )); ?>" name="<?php echo esc_attr ($this->get_field_name( 'custom_post_id' )); ?>">
 				<?php
 					$args = array( 'post_type' => 'content_block', 'suppress_filters' => 0, 'numberposts' => -1, 'order' => 'ASC' );
 					$content_block = get_posts( $args );
 					if ($content_block) {
 						foreach( $content_block as $content_block ) : setup_postdata( $content_block );
-							echo '<option value="' . $content_block -> ID . '"';
+							echo '<option value="' . esc_attr ($content_block -> ID) . '"';
 							if( $custom_post_id == $content_block -> ID ) {
 								echo ' selected';
 								$widgetExtraTitle = $content_block -> post_title;
 							};
-							echo '>' . $content_block -> post_title . '</option>';
+							echo '>' . esc_html ($content_block -> post_title) . '</option>';
 						endforeach;
 					} else {
-						echo '<option value="">' . __( 'No content blocks available', 'ingeni-content-blocks-widget' ) . '</option>';
+						echo '<option value="">' . esc_html__( 'No content blocks available', 'ingeni-content-blocks-widget' ) . '</option>';
 					};
 				?>
 				</select>
 			</label>
 		</p>
 
-		<input type="hidden" id="<?php echo $this -> get_field_id( 'title' ); ?>" name="<?php echo $this -> get_field_name( 'title' ); ?>" value="<?php if ( !empty( $widgetExtraTitle ) ) { echo $widgetExtraTitle; } ?>" />
+		<input type="hidden" id="<?php echo esc_attr ($this -> get_field_id( 'title' )); ?>" name="<?php echo esc_attr ($this -> get_field_name( 'title' )); ?>" value="<?php if ( !empty( $widgetExtraTitle ) ) { echo esc_attr ( $widgetExtraTitle); } ?>" />
 
 		<p>
 			<?php
-				echo '<a href="post.php?post=' . $custom_post_id . '&action=edit">' . __( 'Edit Ingeni Content Block', 'ingeni-content-blocks-widget' ) . '</a>' ;
+				echo '<a href="post.php?post=' . esc_attr ( $custom_post_id ) . '&action=edit">' . esc_html__( 'Edit Ingeni Content Block', 'ingeni-content-blocks-widget' ) . '</a>' ;
 			?>
 		</p>
 
 		<p>
-			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['show_custom_post_title'] ), true ); ?> id="<?php echo $this->get_field_id( 'show_custom_post_title' ); ?>" name="<?php echo $this->get_field_name( 'show_custom_post_title' ); ?>" />
+			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['show_custom_post_title'] ), true ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_custom_post_title' )); ?>" name="<?php echo esc_attr ($this->get_field_name( 'show_custom_post_title' )); ?>" />
 			<label for="<?php echo $this->get_field_id( 'show_custom_post_title' ); ?>"><?php echo __( 'Show post title', 'ingeni-content-blocks-widget' ) ?></label>
 		</p>
 
 		<p>
-			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['show_featured_image'] ), true ); ?> id="<?php echo $this->get_field_id( 'show_featured_image' ); ?>" name="<?php echo $this->get_field_name( 'show_featured_image' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'show_featured_image' ); ?>"><?php echo __( 'Show featured image', 'ingeni-content-blocks-widget' ) ?></label>
+			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['show_featured_image'] ), true ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_featured_image' )); ?>" name="<?php echo esc_attr ( $this->get_field_name( 'show_featured_image' )); ?>" />
+			<label for="<?php echo esc_attr ($this->get_field_id( 'show_featured_image' )) ?>"><?php echo esc_html__( 'Show featured image', 'ingeni-content-blocks-widget' ) ?></label>
 		</p>
 
 		<p>
-			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['apply_content_filters'] ), true ); ?> id="<?php echo $this->get_field_id( 'apply_content_filters' ); ?>" name="<?php echo $this->get_field_name( 'apply_content_filters' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'apply_content_filters' ); ?>"><?php echo __( 'Do not apply content filters', 'ingeni-content-blocks-widget' ) ?></label>
+			<input class="checkbox" type="checkbox" <?php checked( (bool) isset( $instance['apply_content_filters'] ), true ); ?> id="<?php echo esc_attr ($this->get_field_id( 'apply_content_filters' )); ?>" name="<?php echo esc_attr ($this->get_field_name( 'apply_content_filters' )); ?>" />
+			<label for="<?php echo esc_attr ( $this->get_field_id( 'apply_content_filters' )); ?>"><?php echo esc_html__( 'Do not apply content filters', 'ingeni-content-blocks-widget' ) ?></label>
 		</p> <?php
 	}
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['custom_post_id'] = strip_tags( $new_instance['custom_post_id'] );
+		$instance['custom_post_id'] = wp_strip_tags( $new_instance['custom_post_id'] );
 		$instance['show_custom_post_title'] = $new_instance['show_custom_post_title'];
 		$instance['show_featured_image'] = $new_instance['show_featured_image'];
 		$instance['apply_content_filters'] = $new_instance['apply_content_filters'];
@@ -76,7 +76,7 @@ class ingeni_content_blocks_widget extends WP_Widget {
 	// Display the content block content in the widget area
 	function widget($args, $instance) {
 		extract($args);
-		$custom_post_id = ( $instance['custom_post_id'] != '' ) ? esc_attr($instance['custom_post_id']) : __( 'Find', 'ingeni-content-blocks-widget' );
+		$custom_post_id = ( $instance['custom_post_id'] != '' ) ? esc_attr($instance['custom_post_id']) : esc_html__( 'Find', 'ingeni-content-blocks-widget' );
 		// Add support for WPML Plugin.
 		if ( function_exists( 'icl_object_id' ) ){
 			$custom_post_id = icl_object_id( $custom_post_id, 'content_block', true );

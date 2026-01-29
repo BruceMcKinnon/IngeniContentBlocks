@@ -133,6 +133,8 @@ Creating and supporting this plugin takes up a lot of my free time, therefore I 
 
 == Changelog ==
 
+v2026.01 - Update code - ported security fixes from ContentBlocks plugin 
+ 	 - Updated to PluginUpdateChecker v5.6
 v2023.01 - post-type.php - Fix for PHP 8 - strtotime() - do not pass a null to value as param #1
 
 v2022.04 - Fixed various problems around loading CPT meta boxes (meta-box.php) and it's supporting CSS file.

@@ -1,5 +1,6 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 function shortcode_template_callback( $post ) {
 	return 'default';
@@ -23,18 +24,18 @@ function ingeni_content_blocks_shortcode( $atts ) {
 		'template_after_content' => ''
 	), $atts );
 
-	$id = $params['id'];
-	$slug = $params['slug'];
-	$class = $params['class'];
-	$suppress_content_filters = $params['suppress_content_filters'];
-	$featured_image = $params['featured_image'];
-	$featured_image_size = $params['featured_image_size'];
-	$title = $params['title'];
-	$title_tag = $params['title_tag'];
-	$markup = $params['markup'];
-	$template = $params['template'];
-	$template_before_content = $params['template_before_content'];
-	$template_after_content = $params['template_after_content'];
+	$id = sanitize_text_field($params['id']);
+	$slug = sanitize_text_field($params['slug']);
+	$class = sanitize_text_field($params['class']);
+	$suppress_content_filters = sanitize_text_field($params['suppress_content_filters']);
+	$featured_image = sanitize_text_field($params['featured_image']);
+	$featured_image_size = sanitize_text_field($params['featured_image_size']);
+	$title = sanitize_text_field($params['title']);
+	$title_tag = sanitize_text_field($params['title_tag']);
+	$markup = sanitize_text_field($params['markup']);
+	$template = sanitize_text_field($params['template']);
+	$template_before_content = sanitize_text_field($params['template_before_content']);
+	$template_after_content = sanitize_text_field($params['template_after_content']);
 
 	if ( $slug ) {
 		$block = get_page_by_path( $slug, OBJECT, 'ingeni_content_block' );
